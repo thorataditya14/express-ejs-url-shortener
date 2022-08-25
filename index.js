@@ -7,15 +7,10 @@ const bodyParser = require("body-parser");
 const ShortUrl = require('./models/shortUrl')
 
 
-mongoose.connect(
-    process.env.MONGO_URI, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-    },
-    () => {
-        console.log("Database connected successfully!");
-    }
-);
+mongoose.connect(process.env.MONGO_URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+});
 
 
 app.set('view engine', 'ejs')
@@ -49,8 +44,4 @@ app.get('/:shortUrl', async (req, res) => {
 })
 
 
-port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+app.listen(process.env.PORT || 5000);
