@@ -3,19 +3,23 @@ const app = express()
 const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require('mongoose')
+const bodyParser = require("body-parser");
 const ShortUrl = require('./models/shortUrl')
 
-
 mongoose.connect(
-    process.env.MONGO_URI
-).then(() => {
-    console.log('Database connected successfully');
-}).catch((err) => {
-    console.log(err);
-});
+    process.env.MONGO_URI, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true
+    },
+    () => {
+        console.log("Database connected successfully!");
+    }
+);
+
 
 app.set('view engine', 'ejs')
-app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find()
