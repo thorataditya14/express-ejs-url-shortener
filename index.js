@@ -14,9 +14,6 @@ mongoose.connect(
     console.log(err);
 });
 
-
-const PORT = 5000;
-
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 
@@ -41,6 +38,6 @@ app.get('/:shortUrl', async (req, res) => {
     res.redirect(shortUrl.full)
 })
 
-app.listen(process.env.PORT || PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT || PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server is running on port ${process.env.PORT || 3000}`);
 });
